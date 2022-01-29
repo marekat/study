@@ -1,0 +1,16 @@
+D:\study\education\spiralMatrix\bin\Debug\net5.0\spiralMatrix.exe
+D:\study\education\spiralMatrix\bin\Debug\net5.0\spiralMatrix.deps.json
+D:\study\education\spiralMatrix\bin\Debug\net5.0\spiralMatrix.runtimeconfig.json
+D:\study\education\spiralMatrix\bin\Debug\net5.0\spiralMatrix.runtimeconfig.dev.json
+D:\study\education\spiralMatrix\bin\Debug\net5.0\spiralMatrix.dll
+D:\study\education\spiralMatrix\bin\Debug\net5.0\ref\spiralMatrix.dll
+D:\study\education\spiralMatrix\bin\Debug\net5.0\spiralMatrix.pdb
+D:\study\education\spiralMatrix\obj\Debug\net5.0\spiralMatrix.csprojAssemblyReference.cache
+D:\study\education\spiralMatrix\obj\Debug\net5.0\spiralMatrix.GeneratedMSBuildEditorConfig.editorconfig
+D:\study\education\spiralMatrix\obj\Debug\net5.0\spiralMatrix.AssemblyInfoInputs.cache
+D:\study\education\spiralMatrix\obj\Debug\net5.0\spiralMatrix.AssemblyInfo.cs
+D:\study\education\spiralMatrix\obj\Debug\net5.0\spiralMatrix.csproj.CoreCompileInputs.cache
+D:\study\education\spiralMatrix\obj\Debug\net5.0\spiralMatrix.dll
+D:\study\education\spiralMatrix\obj\Debug\net5.0\ref\spiralMatrix.dll
+D:\study\education\spiralMatrix\obj\Debug\net5.0\spiralMatrix.pdb
+D:\study\education\spiralMatrix\obj\Debug\net5.0\spiralMatrix.genruntimeconfig.cache

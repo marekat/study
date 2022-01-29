@@ -4,62 +4,88 @@ namespace spiralMatrix
 {
     class Program
     {
-        /*Входные данные:
-        - размер матрицы N, где N - нечетное число от 0 до 99 и вводится пользователем
-        - X стартовое число
-        - направление (по часовой стрелке или против)
-        Задача:
-        Написать кодешник который будет генерировать матрицу NxN, так чтобы стартовое число было в центре,
-        а остальные элементы заполнялись по спирали с увеличением на единицу*/
-
         static void Main()
+            /*Входные данные:
+            - размер матрицы N, где N - нечетное число от 0 до 99 и вводится пользователем
+            - X стартовое число
+            - направление (по часовой стрелке или против)
+            Задача:
+            Написать кодешник который будет генерировать матрицу NxN, так чтобы стартовое число было в центре,
+            а остальные элементы заполнялись по спирали с увеличением на единицу*/
         {
-            Console.WriteLine("Введи размерность матрицы N - нечетное число от 1 до 99");
-            var n = Console.ReadLine();
-            var nConverted = Verification(n, true);
+            // требования к размерности матрицы
+            var borderFromToMatrixDimension = 1;
+            var borderUpToMatrixDimension = 99;
+            var matrixDimensionMustBeOdd = true;
 
-            Console.WriteLine("Введи стартовое число X - цифра от 0 до 9");
-            var x = Console.ReadLine();
-            var xConverted = Verification(x, false);
+            // требования к стартовому числу
+            var borderFromToStartingNumber = 0;
+            var borderUpToStartingNumber = 9;
+            var startingNumberMustBeOdd = false;
 
-            var matrix = new int[nConverted, nConverted];
-            var maxNumber = nConverted * nConverted + xConverted - 1;
+            var n = InputNumber(true, matrixDimensionMustBeOdd, borderFromToMatrixDimension, borderUpToMatrixDimension);
+            var x = InputNumber(false, startingNumberMustBeOdd, borderFromToStartingNumber, borderUpToStartingNumber);
+            var matrix = CreateMatrix(n, x);
+            PrintMatrix(n, matrix);
+        }
 
-            matrix[(nConverted / 2), nConverted / 2] = xConverted; // заполняем центр
+        // ввод значения
+        private static int InputNumber(bool isMatrixDimension, bool mustBeOdd, int borderFrom, int borderUp)
+        {
+            var isEven = mustBeOdd ? "нечетное" : "";
+            var text = isMatrixDimension ? "размерность матрицы N" : "стартовое число";
+
+            Console.WriteLine("Введи {0} - {1} число от {2} до {3}", text, isEven, borderFrom, borderUp);
+            var value = Console.ReadLine();
+            return Verification(value, borderFrom, borderUp, mustBeOdd);
+        }
+
+        // создание матрицы
+        private static int[,] CreateMatrix(int matrixDimension, int startingNumber)
+        {
+            var matrix = new int[matrixDimension, matrixDimension];
+            var maxNumber = matrixDimension * matrixDimension + startingNumber - 1;
+
+            matrix[(matrixDimension / 2), matrixDimension / 2] = startingNumber; // заполняем центр
             for (var i = 0;
-                i < (nConverted / 2);
+                i < (matrixDimension / 2);
                 i++) //заполняем остальное начиная с левого верхнего угла и закручиваем в центр
             {
-                for (var j = i; j < (nConverted - i); j++)
+                for (var j = i; j < (matrixDimension - i); j++)
                 {
                     matrix[i, j] = maxNumber;
                     maxNumber--;
                 }
 
-                for (var j = 1; j < (nConverted - i - i); j++)
+                for (var j = 1; j < (matrixDimension - i - i); j++)
                 {
-                    matrix[(j + i), (nConverted - i) - 1] = maxNumber;
+                    matrix[(j + i), (matrixDimension - i) - 1] = maxNumber;
                     maxNumber--;
                 }
 
-                for (var j = (nConverted - 2) - i; j >= i; j--)
+                for (var j = (matrixDimension - 2) - i; j >= i; j--)
                 {
-                    matrix[((nConverted - i) - 1), j] = maxNumber;
+                    matrix[((matrixDimension - i) - 1), j] = maxNumber;
                     maxNumber--;
                 }
 
-                for (var j = ((nConverted - i) - 2); j > i; j--)
+                for (var j = ((matrixDimension - i) - 2); j > i; j--)
                 {
                     matrix[j, i] = maxNumber;
                     maxNumber--;
                 }
             }
 
-            // Выводим массив
-            Console.WriteLine(); // для красоты отступим от ввода Х
-            for (var i = 0; i < nConverted; i++)
+            return matrix;
+        }
+
+        // печать матрицы
+        private static void PrintMatrix(int matrixDimension, int[,] matrix)
+        {
+            Console.WriteLine(); // для красоты отступим от ввода стартового числа
+            for (var i = 0; i < matrixDimension; i++)
             {
-                for (var j = 0; j < nConverted; j++)
+                for (var j = 0; j < matrixDimension; j++)
                 {
                     Console.Write($"{matrix[i, j]} \t");
                 }
@@ -68,35 +94,36 @@ namespace spiralMatrix
             }
         }
 
-        private static int Verification(string value, bool isN)
+        private static int Verification(string value, int borderFrom, int borderUp, bool mustBeOdd)
         {
-            try
+            int valueConverted;
+            var success = int.TryParse(value, out valueConverted);
+            if (success)
             {
-                var valueConverted = Convert.ToInt32(value);
-                if (isN)
+                if ((borderFrom > valueConverted) || (valueConverted > borderUp))
                 {
-                    if ((valueConverted is < 1 or > 99) || (valueConverted % 2 == 0))
-                    {
-                        Console.WriteLine("Число должно быть НЕЧЕТНЫМ в диапазоне ОТ 1 ДО 99");
-                        Environment.Exit(0);
-                    }
+                    Console.WriteLine("Число должно быть в диапазоне ОТ {0} ДО {1}", borderFrom, borderUp);
+                    Environment.Exit(0);
                 }
-                else
+
+                if (mustBeOdd)
                 {
-                    if (valueConverted is < 0 or > 9)
+                    if (valueConverted % 2 == 0)
                     {
-                        Console.WriteLine("Число должно быть в диапазоне ОТ 0 ДО 9");
+                        Console.WriteLine("Число должно быть НЕЧЕТНЫМ");
                         Environment.Exit(0);
                     }
                 }
 
                 return valueConverted;
             }
-            catch (FormatException)
+            else
             {
-                Console.WriteLine("Только цифры!");
-                throw;
+                Console.WriteLine("Вводить надо цифры");
+                Environment.Exit(0);
             }
+
+            throw new InvalidOperationException();
         }
     }
 }

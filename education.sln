@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spiralMatrix", "spiralMatrix\spiralMatrix.csproj", "{4D00CD0B-52DD-4757-BE34-763A11D96FF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mathTasks", "mathTasks\mathTasks.csproj", "{4D00CD0B-52DD-4757-BE34-763A11D96FF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
